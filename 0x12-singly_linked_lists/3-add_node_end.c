@@ -3,40 +3,39 @@
 #include "lists.h"
 
 /**
- * add_node_end - Appends a new node to the tail of a linked list
- * @list_head: Double pointer to the list_t list
- * @input_str: String to be included in the new node
+ * add_node_end - adds a new node at the end of a linked list
+ * @head: double pointer
+ * @str: string
  *
- * Return: Address of the new node, or NULL if the operation failed
+ * Return: address of the new element
  */
-
 list_t *add_node_end(list_t **head, const char *str)
 {
-	list_t *new_node;
-	list_t *current_node = *head;
-	unsigned int str_length = 0;
+	list_t *newnode;
+	list_t *tempss = *head;
+	unsigned int len = 0;
 
-	for (; str[str_length]; str_length++)
-	;
+	while (str[len])
+	len++;
 
-	new_node = malloc(sizeof(list_t));
-	if (!new_node)
+	newnode = malloc(sizeof(list_t));
+	if (!newnode)
 	return (NULL);
 
-	new_node->str = strdup(str);
-	new_node->len = str_length;
-	new_node->next = NULL;
+	newnode->str = strdup(str);
+	newnode->len = len;
+	newnode->next = NULL;
 
-if (*head == NULL)
-{
-*head = new_node;
-return (new_node);
-}
+	if (*head == NULL)
+	{
+		*head = newnode;
+		return (newnode);
+	}
 
-	for (; current_node->next; current_node = current_node->next)
-	;
+	while (tempss->next)
+	tempss = tempss->next;
 
-current_node->next = new_node;
+	tempss->next = newnode;
 
-	return (new_node);
+	return (newnode);
 }
